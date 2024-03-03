@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-[arial]">{children}</body>
+      <body className="font-[arial] bg-background w-full h-screen flex items-stretch">{children}</body>
     </html>
   );
 }
