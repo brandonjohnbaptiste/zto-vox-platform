@@ -13,14 +13,14 @@ const config: Config = {
 ],
   darkMode: "class",
   theme: {
-    colors: {
-      "background": "#1e1e1e",
-      "accent": "#4b196f",
-      "background-light": "#2f2f2f",
-      "grey": "#505050",
-      "white": '#ffffff'
-    },
     extend: {
+      colors: {
+        "background": "#1e1e1e",
+        "accent": "#4b196f",
+        "background-light": "#2f2f2f",
+        "grey": "#505050",
+        "white": '#ffffff'
+      }
     },
   },
   plugins: [addVariablesForColors],
