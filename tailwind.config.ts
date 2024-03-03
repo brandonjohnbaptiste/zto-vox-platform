@@ -11,7 +11,7 @@ const config: Config = {
       "background": "#1e1e1e",
       "accent": "#4b196f",
       "background-light": "#2f2f2f",
-      "grey": "505050"
+      "grey": "#505050"
     },
     extend: {
       backgroundImage: {
