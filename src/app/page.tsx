@@ -1,4 +1,5 @@
 import Image from "next/image";
+import {BackgroundBeams} from "@/components/ui/background-beams";
 
 export default function Page() {
   return (
@@ -14,6 +15,7 @@ export default function Page() {
               height={200}
               alt="Company logo"
           />
+          <BackgroundBeams/>
       </main>
   );
 }
