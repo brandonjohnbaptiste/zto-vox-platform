@@ -18,21 +18,23 @@ export default function HomeLayout({
     return (
         <html lang="en">
             <body className="font-[arial] w-full h-screen flex items-stretch">
-            <div>
-                <div className="w-[400px] h-[200px] bg-background-light m-5 rounded-md flex flex-row">
-                    <Image
-                        src='/zto-logo.png'
-                        width={100}
-                        height={100}
-                        alt='company logo'
-                        className="self-center mx-auto w-[50%]"
-                    />
-                    <h2 className={`${bebasNeue.className} text-[8rem] mx-auto self-end w-[50%] text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-indigo-600`} >VM</h2>
+                <div className="float-left">
+                    <div className="w-[400px] h-[200px] bg-background-light m-5 rounded-md flex flex-row">
+                        <Image
+                            src='/zto-logo.png'
+                            width={100}
+                            height={100}
+                            alt='company logo'
+                            className="self-center mx-auto w-[50%]"
+                        />
+                        <h2 className={`${bebasNeue.className} text-[8rem] mx-auto self-end w-[50%] text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-indigo-600`} >VM</h2>
 
+                    </div>
+                    <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md"></div>
                 </div>
-                <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md"></div>
-            </div>
-            {children}
+                <div className="w-full h-[970px] bg-background-light m-5 inline-block rounded-md">
+                    {children}
+                </div>
             </body>
         </html>
     );
