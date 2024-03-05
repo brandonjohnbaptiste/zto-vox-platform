@@ -22,11 +22,12 @@ export default function HomeLayout({
                 <div className="w-[400px] h-[200px] bg-background-light m-5 rounded-md flex flex-row">
                     <Image
                         src='/zto-logo.png'
-                        width={200}
-                        height={200}
+                        width={100}
+                        height={100}
                         alt='company logo'
+                        className="self-center mx-auto w-[50%]"
                     />
-                    <h2 className={`${bebasNeue.className} text-white text-[8rem] mx-auto self-center`} >VM</h2>
+                    <h2 className={`${bebasNeue.className} text-[8rem] mx-auto self-end w-[50%] text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-indigo-600`} >VM</h2>
 
                 </div>
                 <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md"></div>
