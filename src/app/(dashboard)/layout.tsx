@@ -21,7 +21,7 @@ export default function HomeLayout({
                 <div className="float-left">
                     <div className="w-[400px] h-[200px] bg-background-light m-5 rounded-md flex flex-row">
                         <Image
-                            src='/zto-logo.png'
+                             src='/zto-logo.png'
                             width={100}
                             height={100}
                             alt='company logo'
