@@ -20,6 +20,8 @@ export default function LoginPage() {
            password
         });
         router.refresh();
+        setEmail('');
+        setPassword('');
     }
 
 
@@ -29,6 +31,8 @@ export default function LoginPage() {
             password
         });
         router.refresh();
+        setEmail('');
+        setPassword('');
     }
 
     return (
@@ -46,6 +50,9 @@ export default function LoginPage() {
                 value={password}
                 onChange={(event => setPassword(event.target.value))}
             />
+
+            <button onClick={signUp}>Sign Un</button>
+            <button onClick={signIn}>Sign In</button>
         </div>
     )
 
