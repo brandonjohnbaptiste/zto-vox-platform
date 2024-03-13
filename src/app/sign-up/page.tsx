@@ -1,6 +1,5 @@
 'use client'
 
-
 import {ReactNode, useState} from "react";
 import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
 import {useRouter} from "next/navigation";
@@ -39,13 +38,10 @@ export default function LoginPage() {
         });
 
         const {data} = await supabase.auth.getSession();
-        console.log(data);
 
         const { error } = await supabase
             .from('users')
             .insert([{id: data.session.user.id, created_at: null, username: username, name: name, user_type: 0}]);
-        console.log(error);
-        console.log('ran insert');
 
         router.refresh();
         setEmail('');
