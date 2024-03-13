@@ -4,7 +4,6 @@
 import {ReactNode, useState} from "react";
 import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
 import {useRouter} from "next/navigation";
-import {mapIncludes} from "yaml/dist/compose/util-map-includes";
 import cn from "@/utils/cn";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
@@ -38,9 +37,23 @@ export default function LoginPage() {
            email,
            password
         });
+
+        const {data} = await supabase.auth.getSession();
+        console.log(data);
+
+        const { error } = await supabase
+            .from('users')
+            .insert([{id: data.session.user.id, created_at: null, username: username, name: name, user_type: 0}]);
+        console.log(error);
+        console.log('ran insert');
+
         router.refresh();
         setEmail('');
         setPassword('');
+        setUsername('');
+        setName('');
+
+
     }
 
 
@@ -76,9 +89,9 @@ export default function LoginPage() {
             </LabelInputContainer>
             <LabelInputContainer className="mb-4">
                 <Label htmlFor="password">Username</Label>
-                <Input id="name"
+                <Input id="username"
                        placeholder="@username"
-                       type="password"
+                       type="text"
                        value={username}
                        onChange={(e) => setUsername(e.target.value)}
                 />
@@ -87,7 +100,7 @@ export default function LoginPage() {
                 <Label htmlFor="password">Name</Label>
                 <Input id="name"
                        placeholder="Your Name"
-                       type="password"
+                       type="text"
                        value={name}
                        onChange={(e) => setName(e.target.value)}
                 />
