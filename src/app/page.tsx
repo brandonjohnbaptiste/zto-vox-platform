@@ -12,7 +12,7 @@ export default function Page() {
               <h1 className="mb-10 drop-shadow-xl text-center text-8xl cols-span-4 text-transparent font-bold bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">VOX MATCH</h1>
               <Button
                   className="text-white cols-span-2 text-[1rem]  p-4 bg-accent  hover:scale-110"
-                  onClick={() => router.push('/login')}
+                  onClick={() => router.push('/sign-up')}
               >
                   SIGN IN
               </Button>

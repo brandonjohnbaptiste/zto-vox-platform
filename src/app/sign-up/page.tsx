@@ -26,6 +26,8 @@ const LabelInputContainer = ({
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const router = useRouter();
 
 
@@ -47,9 +49,9 @@ export default function LoginPage() {
             email,
             password
         });
-        router.refresh();
         setEmail('');
         setPassword('');
+        router.push('/home');
     }
 
     return (
@@ -70,6 +72,24 @@ export default function LoginPage() {
                        type="password"
                        value={password}
                        onChange={(e) => setPassword(e.target.value)}
+                />
+            </LabelInputContainer>
+            <LabelInputContainer className="mb-4">
+                <Label htmlFor="password">Username</Label>
+                <Input id="name"
+                       placeholder="@username"
+                       type="password"
+                       value={username}
+                       onChange={(e) => setUsername(e.target.value)}
+                />
+            </LabelInputContainer>
+            <LabelInputContainer className="mb-4">
+                <Label htmlFor="password">Name</Label>
+                <Input id="name"
+                       placeholder="Your Name"
+                       type="password"
+                       value={name}
+                       onChange={(e) => setName(e.target.value)}
                 />
             </LabelInputContainer>
             <button
