@@ -33,11 +33,11 @@ export default function HomeLayout({
                     </div>
                     <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
                         <div>
-                            <div className="bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto"></div>
-                            <div className="bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto"></div>
-                            <div className="bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto"></div>
+                            <div className="link-card hover:border-[4px]"></div>
+                            <div className="link-card"></div>
+                            <div className="link-card"></div>
                         </div>
-                        <div className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end"></div>
+                        <div className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end hover:scale-105"></div>
                     </div>
                 </div>
                 <div className="w-full h-[970px] bg-background-light m-5 inline-block rounded-md">
