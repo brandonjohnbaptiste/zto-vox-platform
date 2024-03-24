@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Image from "next/image";
 import {Bebas_Neue} from "next/font/google";
+import Link from "next/link";
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});
 
@@ -30,7 +31,14 @@ export default function HomeLayout({
                         <h2 className={`${bebasNeue.className} text-[8rem] mx-auto self-end w-[50%] text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-indigo-600`} >VM</h2>
 
                     </div>
-                    <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md"></div>
+                    <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
+                        <div>
+                            <div className="bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto"></div>
+                            <div className="bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto"></div>
+                            <div className="bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto"></div>
+                        </div>
+                        <div className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end"></div>
+                    </div>
                 </div>
                 <div className="w-full h-[970px] bg-background-light m-5 inline-block rounded-md">
                     {children}
