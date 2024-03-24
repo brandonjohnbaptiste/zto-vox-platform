@@ -12,6 +12,6 @@
 
 @layer components {
   .link-card {
-    @apply bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto drop-shadow-xl box-border border-accent;
+    @apply bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto drop-shadow-xl box-border border-accent hover:border-[4px];
   }
 }

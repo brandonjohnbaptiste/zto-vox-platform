@@ -1,5 +1,13 @@
-import Essentia from "essentia.js"
+'use server'
+import  {EssentiaModel, EssentiaWASM } from "essentia.js";
 
-let essentia = new Essentia();
 
-console.log(essentia)
+
+
+
+export async function essTest() {
+    console.log('running test func')
+     const essentia = new EssentiaModel(EssentiaWASM);
+     console.log(essentia);
+
+}

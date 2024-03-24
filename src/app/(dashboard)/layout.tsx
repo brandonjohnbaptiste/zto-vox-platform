@@ -33,7 +33,7 @@ export default function HomeLayout({
                     </div>
                     <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
                         <div>
-                            <div className="link-card hover:border-[4px]"></div>
+                            <div className="link-card"></div>
                             <div className="link-card"></div>
                             <div className="link-card"></div>
                         </div>

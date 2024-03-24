@@ -1,11 +1,12 @@
-import Script from "next/script";
+'use client'
 import {Button} from "@/components/ui/moving-border";
+import {essTest} from "@/scripts/test";
 
 export default function Page() {
     return (
         <>
             <h1>DASHBOARD</h1>
-            <Button>RUN</Button>
+            <Button onClick={runTest}>RUN</Button>
         </>
 
     )
@@ -13,5 +14,5 @@ export default function Page() {
 
 
 export function runTest() {
-
+    essTest();
 }
