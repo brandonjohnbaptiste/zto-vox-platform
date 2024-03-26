@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Image from "next/image";
 import {Bebas_Neue} from "next/font/google";
-import Link from "next/link";
+
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});
 
