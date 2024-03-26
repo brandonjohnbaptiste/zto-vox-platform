@@ -17,8 +17,7 @@ export default function HomeLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className="font-[arial] w-full h-screen flex items-stretch">
+            <div className="font-[arial] w-full h-screen flex items-stretch">
                 <div className="float-left">
                     <div className="w-[400px] h-[200px] bg-background-light m-5 rounded-md flex flex-row">
                         <Image
@@ -43,7 +42,6 @@ export default function HomeLayout({
                 <div className="w-full h-[970px] bg-background-light m-5 inline-block rounded-md">
                     {children}
                 </div>
-            </body>
-        </html>
+            </div>
     );
 }
