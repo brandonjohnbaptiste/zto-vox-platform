@@ -1,6 +1,6 @@
 'use client'
 import {Button} from "@/components/ui/moving-border";
-import {essTest} from "@/scripts/test";
+import {runAnalysis} from "@/scripts/audioEngine";
 
 
 export default function Page() {
@@ -15,5 +15,5 @@ export default function Page() {
 
 
 export function runTest() {
-    essTest();
+    runAnalysis();
 }

@@ -6,7 +6,7 @@ let esPkg = require('essentia.js');
 
 
 
-export async function essTest() {
+export async function runAnalysis() {
     const essentia = await new esPkg.Essentia(esPkg.EssentiaWASM);
     console.log(essentia.version)
 
