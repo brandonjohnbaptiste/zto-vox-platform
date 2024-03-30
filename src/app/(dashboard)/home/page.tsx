@@ -15,9 +15,10 @@ export default function Page() {
 }
 
 
-export function RunTest() {
+function RunTest() {
     const audioCtx = new AudioContext();
     console.log(audioCtx)
+
 
     loadModel();
 }
