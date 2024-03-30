@@ -1,19 +1,23 @@
 'use client'
 import {Button} from "@/components/ui/moving-border";
-import {runAnalysis} from "@/scripts/audioEngine";
+import {RunAnalysis} from "@/scripts/audioEngine";
+import loadModel from "@/scripts/audioUtils";
 
 
 export default function Page() {
     return (
         <>
             <h1>DASHBOARD</h1>
-            <Button onClick={runTest}>RUN</Button>
+            <Button onClick={RunTest}>RUN</Button>
         </>
 
     )
 }
 
 
-export function runTest() {
-    runAnalysis();
+export function RunTest() {
+    const audioCtx = new AudioContext();
+    console.log(audioCtx)
+
+    loadModel();
 }
