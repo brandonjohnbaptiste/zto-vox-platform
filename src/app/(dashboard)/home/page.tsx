@@ -1,20 +1,17 @@
 'use client'
-import {Button} from "@/components/ui/moving-border";
-import loadModel from "@/scripts/audioUtils";
-import {useState} from "react";
+import React, {useState} from "react";
 import {RunAnalysis} from "@/scripts/audioEngine";
+import {Button} from "@/components/ui/moving-border";
 
 
 export default function Page() {
     const [bpm, setBpm] = useState('0');
 
+
     const calcBpm = async () => {
         let modelBpm = await RunAnalysis();
-        console.log(modelBpm);
         setBpm(`${modelBpm.toFixed(0)}`);
     }
-
-
 
 
     return (
@@ -23,6 +20,5 @@ export default function Page() {
             <Button onClick={calcBpm}>RUN</Button>
             <h2>{bpm}</h2>
         </>
-
     )
 }
