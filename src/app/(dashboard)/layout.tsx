@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Image from "next/image";
 import {Bebas_Neue} from "next/font/google";
+import {BeakerIcon} from "@heroicons/react/24/solid";
 
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});
@@ -31,10 +32,13 @@ export default function HomeLayout({
 
                     </div>
                     <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
-                        <div>
-                            <div className="link-card"></div>
-                            <div className="link-card"></div>
-                            <div className="link-card"></div>
+                        <div className="flex flex-col">
+                            <button className="link-card self-center"></button>
+                            <button className="link-card"></button>
+                            <button className="link-card">
+                                <BeakerIcon className="h-10 w-10 text-white"/>
+
+                            </button>
                         </div>
                         <div className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end hover:scale-105"></div>
                     </div>
