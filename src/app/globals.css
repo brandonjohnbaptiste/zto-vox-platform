@@ -12,9 +12,13 @@
 
 @layer components {
   .link-card {
-    @apply bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto drop-shadow-xl box-border border-accent hover:border-[4px];
+    @apply bg-grey w-[90%] h-[100px] rounded-xl my-4 mx-auto drop-shadow-xl box-border border-accent hover:border-[4px] flex justify-center items-center;
   }
   .link-icon {
     @apply h-6 w-6 text-white basis-2/12
+  }
+
+  .link-text {
+    @apply font-[arial] text-[1.25rem] font-bold text-white uppercase text-center basis-8/12
   }
 }
