@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import Image from "next/image";
 import {Bebas_Neue} from "next/font/google";
-import {BeakerIcon} from "@heroicons/react/24/solid";
+import {ArrowLeftIcon, BeakerIcon} from "@heroicons/react/24/solid";
 
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});
@@ -33,14 +33,17 @@ export default function HomeLayout({
                     </div>
                     <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
                         <div className="flex flex-col">
-                            <button className="link-card self-center"></button>
                             <button className="link-card"></button>
-                            <button className="link-card">
-                                <BeakerIcon className="h-10 w-10 text-white"/>
-
+                            <button className="link-card"></button>
+                            <button className="link-card flex justify-center items-center">
+                                <BeakerIcon className="h-8 w-8 basis-4/12 text-white"/>
+                                <h2 className="font-[arial] text-[1.25rem] font-bold text-white uppercase text-left basis-8/12">Sample Analysis</h2>
                             </button>
                         </div>
-                        <div className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end hover:scale-105"></div>
+                        <button className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end hover:scale-105 flex justify-center items-center">
+                            <ArrowLeftIcon className="h-6 w-6 text-white basis-2/12" />
+                            <h1 className="text-white font-[arial] text-[1.5rem] font-bold uppercase text-center basis-8/12">Sign Out</h1>
+                        </button>
                     </div>
                 </div>
                 <div className="w-full h-[970px] bg-background-light m-5 inline-block rounded-md">
