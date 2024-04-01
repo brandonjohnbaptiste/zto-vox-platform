@@ -22,9 +22,9 @@ export default function HomeLayout({
     const router = useRouter();
 
     return (
-            <div className="font-[arial] w-full h-screen flex items-stretch">
-                <div className="float-left">
-                    <div className="w-[400px] h-[200px] bg-background-light m-5 rounded-md flex flex-row">
+            <div className="font-[arial]  flex items-stretch">
+                <div className="float-left w-[30%] h-[calc(100% + rem)] flex flex-col">
+                    <div className="basis-2/12  bg-background-light m-5 rounded-md flex flex-row">
                         <Image
                              src='/zto-logo.png'
                             width={100}
@@ -35,7 +35,7 @@ export default function HomeLayout({
                         <h2 className={`${bebasNeue.className} text-[8rem] mx-auto self-end w-[50%] text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-violet-600 to-indigo-600`} >VM</h2>
 
                     </div>
-                    <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
+                    <div className="grow bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
                         <div className="flex flex-col">
                             <button
                                 className="link-card"
@@ -64,7 +64,7 @@ export default function HomeLayout({
                         </button>
                     </div>
                 </div>
-                <div className="w-full h-[970px] bg-background-light m-5 inline-block rounded-md">
+                <div className="w-full h-[calc(100% + 2rem)] bg-background-light m-5 inline-block rounded-md">
                     {children}
                 </div>
             </div>
