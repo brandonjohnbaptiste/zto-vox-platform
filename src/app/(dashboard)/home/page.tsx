@@ -16,9 +16,7 @@ export default function Page() {
 
     return (
         <>
-            <h1>DASHBOARD</h1>
-            <Button onClick={calcBpm}>RUN</Button>
-            <h2>{bpm}</h2>
+            <h1 className="font-[arial] text-[1.75rem] text-white font-bold m-10">DASHBOARD</h1>
         </>
     )
 }
