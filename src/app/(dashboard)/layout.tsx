@@ -1,13 +1,15 @@
+'use client'
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import Image from "next/image";
 import {Bebas_Neue} from "next/font/google";
 import {ArrowLeftIcon, BeakerIcon, HomeIcon, RectangleStackIcon} from "@heroicons/react/24/solid";
+import {useRouter} from "next/navigation";
 
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
     title: "Vox Match",
     description: "An online platform for matching vocals to samples",
 };
@@ -17,6 +19,8 @@ export default function HomeLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const router = useRouter();
+
     return (
             <div className="font-[arial] w-full h-screen flex items-stretch">
                 <div className="float-left">
@@ -33,7 +37,10 @@ export default function HomeLayout({
                     </div>
                     <div className="w-[400px] h-[750px] bg-background-light m-5 rounded-md flex flex-col content-center justify-between">
                         <div className="flex flex-col">
-                            <button className="link-card">
+                            <button
+                                className="link-card"
+                                onClick={() => router.push('/home')}
+                            >
                                 <HomeIcon className="link-icon" />
                                 <h2 className="link-text">Home</h2>
                             </button>
@@ -41,7 +48,12 @@ export default function HomeLayout({
                                 <RectangleStackIcon className="link-icon" />
                                 <h2 className="link-text">Playlists</h2>
                             </button>
-                            <button className="link-card">
+                            <button
+                                className="link-card"
+                                onClick={
+                                    () => router.push('/engine')
+                                }
+                            >
                                 <BeakerIcon className="h-8 w-8 basis-4/12 text-white"/>
                                 <h2 className="font-[arial] text-[1.25rem] font-bold text-white uppercase text-left basis-8/12">Sample Analysis</h2>
                             </button>
