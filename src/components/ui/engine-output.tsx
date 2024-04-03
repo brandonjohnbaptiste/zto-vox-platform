@@ -1,15 +1,18 @@
 'use client'
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
-import {CalcBpm} from "@/scripts/audioEngine";
+import {ExtractBpm, ExtractKey} from "@/scripts/audioEngine";
 import {useState} from "react";
 
 export default function EngineOutput() {
 
     const [bpm, setBpm] = useState(0);
+    const [key, setKey] = useState('');
 
-    async function getBpmValue() {
-        const modelBpm = await CalcBpm();
+    async function RunAnalysis() {
+        const modelBpm = await ExtractBpm();
         setBpm(modelBpm.toFixed(0));
+
+        const modelKey = await ExtractKey();
     }
 
     return (
@@ -30,7 +33,7 @@ export default function EngineOutput() {
                     </div>
                     <button
                         className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem]"
-                        onClick={getBpmValue}
+                        onClick={RunAnalysis}
                     >Run Analysis</button>
                </div>
             </div>
