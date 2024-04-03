@@ -1,6 +1,17 @@
+'use client'
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
+import {CalcBpm} from "@/scripts/audioEngine";
+import {useState} from "react";
 
 export default function EngineOutput() {
+
+    const [bpm, setBpm] = useState(0);
+
+    async function getBpmValue() {
+        const modelBpm = await CalcBpm();
+        setBpm(modelBpm.toFixed(0));
+    }
+
     return (
         <>
             <div className="bg-gradient-to-b from-accent via-pink-accent/80 to-accent/30 w-[20%] h-[40vh] p-1 rounded-md drop-shadow-xl">
@@ -11,13 +22,16 @@ export default function EngineOutput() {
                     </div>
                     <div className="basis-2/12 w-full h-full flex">
                         <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">BPM:</h3>
-                        <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">123</p>
+                        <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{bpm}</p>
                     </div>
                     <div className="basis-2/12 w-full h-full flex">
                         <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">KEY: </h3>
                         <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">C#m</p>
                     </div>
-                    <button className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem]">Run Analysis</button>
+                    <button
+                        className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem]"
+                        onClick={getBpmValue}
+                    >Run Analysis</button>
                </div>
             </div>
 
