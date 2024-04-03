@@ -14,6 +14,7 @@ export async function ExtractBpm() {
     const audioVector = essentia.arrayToVector(audio.channelData[0]);
     let calculatedBpm = await essentia.RhythmExtractor(audioVector);
 
+    essentia.shutdown();
     return calculatedBpm.bpm;
 }
 
@@ -32,6 +33,8 @@ export async function ExtractKey() {
     } else {
         scale = '';
     }
+
+    essentia.shutdown();
     return extractedKey.key + scale;
 
 }

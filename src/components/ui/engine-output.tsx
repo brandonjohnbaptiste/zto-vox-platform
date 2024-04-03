@@ -26,14 +26,14 @@ export default function EngineOutput() {
                     </div>
                     <div className="basis-2/12 w-full h-full flex">
                         <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">BPM:</h3>
-                        <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{bpm}</p>
+                            <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{bpm}</p>
                     </div>
                     <div className="basis-2/12 w-full h-full flex">
                         <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">KEY: </h3>
                         <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{key}</p>
                     </div>
                     <button
-                        className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem]"
+                        className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105"
                         onClick={RunAnalysis}
                     >Run Analysis</button>
                </div>
