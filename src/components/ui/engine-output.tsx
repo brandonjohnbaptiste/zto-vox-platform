@@ -2,15 +2,16 @@
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
 import {ExtractBpm, ExtractKey} from "@/scripts/audioEngine";
 import {useState} from "react";
+import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
 
 export default function EngineOutput() {
-
     const [bpm, setBpm] = useState();
     const [key, setKey] = useState('');
 
     async function RunAnalysis() {
         const modelBpm = await ExtractBpm();
         setBpm(modelBpm.toFixed(0));
+
 
         const modelKey = await ExtractKey();
         setKey(modelKey);
