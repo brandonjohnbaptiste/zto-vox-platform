@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 
+.uppy-c-btn {
+  color: #8f2cd4 !important;
+}
+
+.uppy-c-btn:hover {
+  color: #8f2cd4 !important;
+  text-decoration: underline !important;
+}
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -16,8 +26,12 @@
   .link-icon {
     @apply h-6 w-6 text-white basis-2/12
   }
-
   .link-text {
     @apply font-[arial] text-[1.25rem] font-bold text-white uppercase text-center basis-8/12
   }
+
+  .uppy-Dashboard-browse {
+    @apply font-accent;
+  }
+
 }

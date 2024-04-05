@@ -1,5 +1,5 @@
 'use client';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Uppy from "@uppy/core";
 import {Dashboard} from "@uppy/react";
 
@@ -9,5 +9,5 @@ import '@uppy/dashboard/dist/style.min.css';
 export default function Uploader() {
     const [uppy] = useState(() => new Uppy());
 
-    return <Dashboard uppy={uppy} />
+    return <Dashboard uppy={uppy} theme="dark"/>
 }
