@@ -2,14 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+.uppy-Dashboard-inner {
+  border: none !important;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+}
 
-.uppy-c-btn {
+[data-uppy-theme=dark] .uppy-Dashboard-browse {
   color: #8f2cd4 !important;
 }
 
+
 .uppy-c-btn:hover {
+  border: none !important;
   color: #8f2cd4 !important;
-  text-decoration: underline !important;
+  border-bottom: 1px solid #8f2cd4 !important;
+}
+
+
+
+.uppy-Dashboard-browse:hover, .uppy-Dashboard-browse:focus {
+  border-bottom: 1px solid #8f2cd4 !important;
+}
+
+.uppy-Dashboard-Item-previewInnerWrap {
+  background-color: #505050 !important;
+}
+
+[data-uppy-theme=dark] .uppy-DashboardContent-back {
+  color: #ec4899 !important;
+}
+.uppy-StatusBar-actionBtn--upload {
+  background-color: #4b196f !important;
+}
+
+.uppy-StatusBar-actionBtn--upload:focus {
+  box-shadow: none !important;
 }
 
 
