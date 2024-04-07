@@ -6,7 +6,6 @@ import {Bebas_Neue} from "next/font/google";
 import {ArrowLeftIcon, BeakerIcon, HomeIcon, RectangleStackIcon} from "@heroicons/react/24/solid";
 import {useRouter} from "next/navigation";
 import {createClient} from "@/utils/supabase/client";
-import {redirect} from "next/dist/server/api-utils";
 
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});

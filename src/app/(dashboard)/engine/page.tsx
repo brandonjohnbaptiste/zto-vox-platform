@@ -1,3 +1,4 @@
+'use client'
 import FileUpload from "@/components/ui/file-upload";
 import EngineOutput from "@/components/ui/engine-output";
 

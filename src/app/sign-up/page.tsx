@@ -59,7 +59,9 @@ export default function LoginPage() {
             password
         });
 
-        const { data: { user } } = await supabase.auth.getUser()
+        const { data: {user} } = await supabase.auth.getUser();
+        console.log(user);
+
         if (user) {
             setEmail('');
             setPassword('');
