@@ -5,7 +5,6 @@ import {useEffect} from "react";
 
 export default function FileUpload() {
     const supabase = createClientComponentClient();
-    const user_samples = '';
 
 
     async function grabUserData() {

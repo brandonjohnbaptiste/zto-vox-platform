@@ -6,6 +6,7 @@ import {useRouter} from "next/navigation";
 import cn from "@/utils/cn";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
+import {createClient} from "@/utils/supabase/client";
 
 const LabelInputContainer = ({
                                  children,
@@ -29,21 +30,20 @@ export default function LoginPage() {
     const router = useRouter();
 
 
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
 
     const signUp = async () => {
-        await supabase.auth.signUp({
+        const data = await supabase.auth.signUp({
            email,
            password
         });
 
-        const {data} = await supabase.auth.getSession();
 
+        const date = new Date().toISOString();
         const { error } = await supabase
             .from('users')
-            .insert([{id: data.session.user.id, created_at: null, username: username, name: name, user_type: 0}]);
+            .insert([{id: data.data.user.id, created_at: date, username: username, name: name, user_type: 0}]);
 
-        router.refresh();
         setEmail('');
         setPassword('');
         setUsername('');
@@ -59,14 +59,14 @@ export default function LoginPage() {
             password
         });
 
-        const { data, error } = await supabase.auth.refreshSession();
-        const { session, user } = data;
-
-        console.log(session);
-        console.log(user);
-        setEmail('');
-        setPassword('');
-        //router.push('/home');
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+            setEmail('');
+            setPassword('');
+            router.push('/home');
+        } else {
+            // display error
+        }
     }
 
     return (
