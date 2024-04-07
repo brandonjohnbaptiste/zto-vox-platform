@@ -58,9 +58,15 @@ export default function LoginPage() {
             email,
             password
         });
+
+        const { data, error } = await supabase.auth.refreshSession();
+        const { session, user } = data;
+
+        console.log(session);
+        console.log(user);
         setEmail('');
         setPassword('');
-        router.push('/home');
+        //router.push('/home');
     }
 
     return (

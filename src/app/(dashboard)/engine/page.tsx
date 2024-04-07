@@ -8,10 +8,6 @@ export default function Page() {
                 <h1 className="font-[arial] text-[1.75rem] text-white font-bold">ENGINE ANALYSIS</h1>
                 <FileUpload/>
                 <div className="mt-5 flex justify-between">
-                    <EngineOutput/>
-                    <EngineOutput/>
-                    <EngineOutput/>
-                    <EngineOutput/>
                 </div>
             </div>
 
