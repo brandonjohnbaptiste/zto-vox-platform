@@ -5,6 +5,8 @@ import Image from "next/image";
 import {Bebas_Neue} from "next/font/google";
 import {ArrowLeftIcon, BeakerIcon, HomeIcon, RectangleStackIcon} from "@heroicons/react/24/solid";
 import {useRouter} from "next/navigation";
+import {createClient} from "@/utils/supabase/client";
+import {redirect} from "next/dist/server/api-utils";
 
 
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"]});
@@ -20,6 +22,14 @@ export default function HomeLayout({
     children: React.ReactNode;
 }>) {
     const router = useRouter();
+
+    async function signOut() {
+        const supabase = createClient();
+        const { error } = await supabase.auth.signOut();
+
+        router.push('/');
+
+    }
 
     return (
             <div className="font-[arial]  flex items-stretch">
@@ -58,7 +68,10 @@ export default function HomeLayout({
                                 <h2 className="font-[arial] text-[1.25rem] font-bold text-white uppercase text-left basis-8/12">Sample Analysis</h2>
                             </button>
                         </div>
-                        <button className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end hover:scale-105 flex justify-center items-center">
+                        <button
+                            className="bg-accent w-[90%] h-[100px] rounded-xl my-4 mx-auto justify-self-end hover:scale-105 flex justify-center items-center"
+                            onClick={signOut}
+                        >
                             <ArrowLeftIcon className="link-icon" />
                             <h1 className="text-white font-[arial] text-[1.5rem] font-bold uppercase text-center basis-8/12">Sign Out</h1>
                         </button>

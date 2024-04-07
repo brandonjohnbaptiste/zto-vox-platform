@@ -8,10 +8,15 @@ export default function FileUpload() {
     const user_samples = '';
 
 
+    async function grabUserData() {
+        const {data, error} = await supabase.auth.getUser();
 
-    //const { data: {user} } = supabase.auth.getUser();
-    //console.log(user);
+        console.log(data);
+    }
 
+    useEffect(() =>{
+       grabUserData();
+    });
 
 
     return (
