@@ -23,9 +23,11 @@ export async function ExtractBpm(url) {
 }
 
 
-export async function ExtractKey() {
+export async function ExtractKey(url) {
     const essentia = await new es.Essentia(es.EssentiaWASM);
-    let buffer = await fs.readFile(process.cwd() + '/src/audioStore/replay-95bpm.wav');
+
+    let requestedFile = await fetch(url)
+    let buffer = await requestedFile.buffer();
     let audio = wav.decode(buffer);
 
 

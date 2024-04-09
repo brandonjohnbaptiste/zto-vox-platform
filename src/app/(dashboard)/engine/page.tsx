@@ -40,7 +40,7 @@ export default function Page() {
         setBpm(modelBpm.toFixed(0));
 
 
-        const modelKey = await ExtractKey();
+        const modelKey = await ExtractKey(data.publicUrl);
         setKey(modelKey);
     }
 
@@ -66,8 +66,6 @@ export default function Page() {
                         {userSamples.map(sample => (
                             <option key={sample.id} value={sample.file_name}>{sample.file_name}</option>
                         ))}
-                        <option value="bob">Bob</option>
-                        <option value="charles">Charles</option>
                     </select>
                     <button
                         className="bg-background-light p-5 rounded-md m-5 font-[arial] text-white uppercase"
