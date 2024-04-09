@@ -1,10 +1,23 @@
 'use client'
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
-import {ExtractBpm, ExtractKey} from "@/scripts/audioEngine";
-import {useEffect, useState} from "react";
-import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
+import {useEffect, useRef, useState} from "react";
+import useSound from "use-sound";
 
 export default function EngineOutput({file}) {
+
+
+    const [play, {stop}] = useSound(file.url);
+    const [playing, setPlaying] = useState(false);
+
+    function playSong() {
+        setPlaying(true);
+        play();
+    }
+
+    function stopSong() {
+        setPlaying(false);
+        stop();
+    }
 
     return (
         <>
@@ -24,7 +37,9 @@ export default function EngineOutput({file}) {
                     </div>
                     <button
                         className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105"
-                    >Run Analysis</button>
+                        onClick={playing ? stopSong : playSong}
+                    >Play
+                    </button>
                </div>
             </div>
 

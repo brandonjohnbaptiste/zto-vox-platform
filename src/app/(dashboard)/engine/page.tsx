@@ -12,6 +12,7 @@ export default function Page() {
 
     const supabase = createClient();
     const [userSamples, setUserSamples] = useState([]);
+    const [sampleUrl, setSampleUrl] = useState('');
     const [engineFile, setEngineFile] = useState();
     const [selectVal, setSelectVal]: any = useState('1');
     const [bpm, setBpm] = useState();
@@ -36,12 +37,14 @@ export default function Page() {
             .getPublicUrl(selectVal + '.wav');
 
 
+
         const modelBpm = await ExtractBpm(data.publicUrl);
         setBpm(modelBpm.toFixed(0));
 
 
         const modelKey = await ExtractKey(data.publicUrl);
         setKey(modelKey);
+        setSampleUrl(data.publicUrl);
     }
 
 
@@ -59,6 +62,7 @@ export default function Page() {
                         value={selectVal}
                         onChange={(e) => {
                             setSelectVal(e.target.value)
+                            setLoading(false);
                         }}
                         className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
                     >
@@ -70,8 +74,9 @@ export default function Page() {
                     <button
                         className="bg-background-light p-5 rounded-md m-5 font-[arial] text-white uppercase"
                         onClick={() => {
-                            RunAnalysis()
                             setLoading(true)
+                            RunAnalysis()
+
                         }}
                     >RUN ANALYSIS
                     </button>
@@ -79,7 +84,7 @@ export default function Page() {
                 <div className="mt-5 flex justify-between">
                     {loading &&
                         <EngineOutput
-                            file={{title: selectVal, key: key, bpm: bpm}}
+                            file={{title: selectVal, key: key, bpm: bpm, url: sampleUrl}}
                         />
                     }
                 </div>
