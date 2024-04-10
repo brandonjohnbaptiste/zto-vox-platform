@@ -53,7 +53,10 @@ export default function HomeLayout({
                                 <HomeIcon className="link-icon" />
                                 <h2 className="link-text">Home</h2>
                             </button>
-                            <button className="link-card">
+                            <button
+                                className="link-card"
+                                onClick={() => router.push('/playlist')}
+                            >
                                 <RectangleStackIcon className="link-icon" />
                                 <h2 className="link-text">Playlists</h2>
                             </button>
