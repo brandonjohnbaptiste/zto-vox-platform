@@ -50,8 +50,12 @@ export default function Page() {
 
 
         setCurrentPlaylist(updatedPlaylist);
-        //setShowingData(false);
 
+        /* TODO
+        *
+        * Update the database with new json data
+        *
+        * */
 
     }
 
@@ -107,8 +111,6 @@ export default function Page() {
                                 onClick={() => {
                                         setShowingData(false);
                                         addSong().then(() => setShowingData(true));
-
-
                                     }
                                 }
                             >Add to playlist</button>
