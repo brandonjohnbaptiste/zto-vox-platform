@@ -50,8 +50,7 @@ export default function Page() {
 
 
         setCurrentPlaylist(updatedPlaylist);
-        setShowingData(false);
-
+        //setShowingData(false);
 
 
     }
@@ -106,8 +105,10 @@ export default function Page() {
                             </select>
                             <button
                                 onClick={() => {
-                                        addSong().finally(setShowingData(true));
-                                        ;
+                                        setShowingData(false);
+                                        addSong().then(() => setShowingData(true));
+
+
                                     }
                                 }
                             >Add to playlist</button>
