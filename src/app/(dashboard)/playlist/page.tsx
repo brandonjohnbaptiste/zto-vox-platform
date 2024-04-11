@@ -23,9 +23,9 @@ export default function Page() {
     }
 
     function displayPlaylist(playlist) {
+         console.log(playlist);
         setCurrentPlaylist(playlist);
         setShowingData(true);
-
     }
 
     useEffect(() => {
@@ -41,7 +41,8 @@ export default function Page() {
                         <button
                             key={playlist.id}
                             onClick={() => {
-                                displayPlaylist(playlist)
+                                setShowingData(false);
+                                getUserPlaylists().then(() => displayPlaylist(playlist))
                             }}
                         >{playlist.playlist_name}
                         </button>
