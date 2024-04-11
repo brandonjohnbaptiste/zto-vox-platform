@@ -4,6 +4,7 @@ import {useState} from "react";
 export default function SampleDisplay({playlist}) {
     const supabase = createClient();
     const [samples, setSamples] = useState(playlist.samples);
+    const rand = require('random-key');
 
 
     async function removeSample(targetSample) {
@@ -20,7 +21,7 @@ export default function SampleDisplay({playlist}) {
     return (
         <>
             {samples.map(sample => (
-                <div key={sample.id}>
+                <div key={rand.generate(5)}>
                     <button>PLAY</button>
                     <p className="font-bold text-white">{sample.file_name}</p>
                     <p>Bpm: {sample.bpm}</p>
