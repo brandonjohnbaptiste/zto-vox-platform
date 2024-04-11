@@ -1,10 +1,9 @@
 import {createClient} from "@/utils/supabase/client";
-import {useRouter} from "next/navigation";
+import {useState} from "react";
 
 export default function SampleDisplay({playlist}) {
     const supabase = createClient();
-    const router = useRouter();
-
+    const [samples, setSamples] = useState(playlist.samples);
 
 
     async function removeSample(targetSample) {
@@ -15,12 +14,12 @@ export default function SampleDisplay({playlist}) {
             .update({samples: sampleJson})
             .eq('id', playlist.id);
 
-
+        setSamples(sampleJson);
     }
 
     return (
         <>
-            {playlist.samples.map(sample => (
+            {samples.map(sample => (
                 <div key={sample.id}>
                     <button>PLAY</button>
                     <p className="font-bold text-white">{sample.file_name}</p>

@@ -8,11 +8,10 @@ export default function Page() {
     const router = useRouter();
     const supabase = createClient();
     const [playlists, setPlaylists] = useState([]);
-    const [user, setUser]: any = useState();
     const [showingData, setShowingData] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
 
-    async function getUserPlaylists() {
+     async function getUserPlaylists() {
         const  {data: {user: currentUser}} = await supabase.auth.getUser();
 
         const {data, err} = await supabase
@@ -21,7 +20,6 @@ export default function Page() {
             .eq('created_by', currentUser.id);
 
         setPlaylists(data);
-        setUser(currentUser);
     }
 
     function displayPlaylist(playlist) {
@@ -32,7 +30,6 @@ export default function Page() {
 
     useEffect(() => {
         getUserPlaylists();
-        return;
     }, []);
 
     return (
