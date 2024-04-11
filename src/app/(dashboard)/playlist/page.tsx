@@ -30,7 +30,8 @@ export default function Page() {
 
     useEffect(() => {
         getUserPlaylists();
-    })
+        return;
+    }, [])
 
     return (
         <>
@@ -49,7 +50,7 @@ export default function Page() {
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
                     {showingData &&
-                        <SampleDisplay playlist={currentPlaylist} user={user} />
+                        <SampleDisplay playlist={currentPlaylist}/>
                     }
                 </div>
             </div>
