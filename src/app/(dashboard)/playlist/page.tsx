@@ -2,8 +2,10 @@
 import {createClient} from "@/utils/supabase/client";
 import {useEffect, useState} from "react";
 import SampleDisplay from "@/components/ui/sample-display";
+import {useRouter} from "next/navigation";
 
 export default function Page() {
+    const router = useRouter();
     const supabase = createClient();
     const [playlists, setPlaylists] = useState([]);
     const [user, setUser]: any = useState();
@@ -31,7 +33,7 @@ export default function Page() {
     useEffect(() => {
         getUserPlaylists();
         return;
-    }, [])
+    }, []);
 
     return (
         <>
@@ -50,7 +52,10 @@ export default function Page() {
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
                     {showingData &&
-                        <SampleDisplay playlist={currentPlaylist}/>
+                        <div>
+                            <SampleDisplay playlist={currentPlaylist}/>
+                        </div>
+
                     }
                 </div>
             </div>

@@ -21,7 +21,7 @@ export default function Page() {
 
         const {data: {user}} = await supabase.auth.getUser();
 
-        const {data, err} = await supabase
+        const {data} = await supabase
             .from('samples')
             .select()
             .eq('created_by', user.id);
