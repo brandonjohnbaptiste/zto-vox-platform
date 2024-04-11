@@ -8,7 +8,7 @@ export default function Page() {
     const [playlists, setPlaylists] = useState([]);
     const [userSamples, setUserSamples] = useState([]);
     const [selectVal, setSelectVal]: any = useState();
-    const [showingData, setShowingData] = useState(false);
+    const [showingData, setShowingData]: boolean = useState(false);
     const [addingSample, setAddingSample] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
 
@@ -36,24 +36,27 @@ export default function Page() {
     }
 
      async function addSong() {
-        console.log('Song to be added: ' + selectVal);
         const {data} = await supabase
             .from('samples')
             .select()
             .eq('file_name', selectVal);
 
-        console.log(data);
-        console.log(currentPlaylist.samples);
+        let newSampleArray = currentPlaylist.samples.concat(data);
 
-        let updatedPlaylist = currentPlaylist.samples.push(data);
-       // setCurrentPlaylist();
-
+        let updatedPlaylist = {...currentPlaylist};
+        updatedPlaylist.samples = newSampleArray
         console.log(currentPlaylist);
         console.log(updatedPlaylist);
+
+
+        setCurrentPlaylist(updatedPlaylist);
+        setShowingData(false);
+
+
+
     }
 
     function displayPlaylist(playlist) {
-         console.log(playlist);
         setCurrentPlaylist(playlist);
         setShowingData(true);
     }
@@ -101,7 +104,13 @@ export default function Page() {
                                     <option key={sample.id} value={sample.file_name}>{sample.file_name}</option>
                                 ))}
                             </select>
-                            <button onClick={() => addSong()}>Add to playlist</button>
+                            <button
+                                onClick={() => {
+                                        addSong().finally(setShowingData(true));
+                                        ;
+                                    }
+                                }
+                            >Add to playlist</button>
                         </div>
 
                     }
