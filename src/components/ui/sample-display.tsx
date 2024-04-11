@@ -1,14 +1,21 @@
 import {createClient} from "@/utils/supabase/client";
+import {useRouter} from "next/navigation";
 
 export default function SampleDisplay({playlist}) {
     const supabase = createClient();
+    const router = useRouter();
+
 
 
     async function removeSample(targetSample) {
         const sampleJson = playlist.samples.filter(sample => sample.id !== targetSample.id);
 
-        //const {error} = await supabase
-        console.log(sampleJson);
+        const {error} = await supabase
+            .from('playlists')
+            .update({samples: sampleJson})
+            .eq('id', playlist.id);
+
+
     }
 
     return (
