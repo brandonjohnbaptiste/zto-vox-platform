@@ -2,33 +2,35 @@
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
 import {useEffect, useState} from "react";
 
-const useAudio = (url) => {
-    const [audio] = useState(new Audio(url));
-    const [playing, setPlaying] = useState(false);
-    const toggle = () => setPlaying(!playing);
 
-    useEffect(() => {
-        playing ? audio.play() : audio.pause();
-    }, [playing, audio]);
-
-    useEffect(() => {
-        audio.addEventListener("ended", () => setPlaying(false));
-        return () => {
-            audio.removeEventListener("ended", () => setPlaying(false));
-        };
-    }, [audio]);
-
-    return [playing, toggle];
-};
 
 
 export default function EngineOutput({file}) {
+    const useAudio = (url) => {
+        const [audio] = useState(new Audio(url));
+        const [playing, setPlaying] = useState(false);
+        const toggle = () => setPlaying(!playing);
+
+        useEffect(() => {
+            playing ? audio.play() : audio.pause();
+        }, [playing, audio]);
+
+        useEffect(() => {
+            audio.addEventListener("ended", () => setPlaying(false));
+            return () => {
+                audio.removeEventListener("ended", () => setPlaying(false));
+            };
+        }, [audio]);
+
+        return [playing, toggle];
+    };
+
+
     const [playing, toggle] = useAudio(file.url);
 
     return (
         <>
             <div className="bg-gradient-to-b from-accent via-pink-accent/80 to-accent/30 w-[20%] h-[40vh] p-1 rounded-md drop-shadow-xl">
-                <audio src={file.url}></audio>
                 <div className="bg-grey w-[100%] h-[100%] rounded-md flex flex-col">
                     <div className="my-5 basis-8/12 w-full h-full flex flex-col">
                         <MusicalNoteIcon className="text-white w-20 h-20 mx-auto" />
@@ -45,7 +47,7 @@ export default function EngineOutput({file}) {
                     <button
                         className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105"
                         onClick={toggle}
-                    >{playing ? 'Play' : 'Pause'}
+                    >{playing ? 'Pause' : 'Play'}
                     </button>
                </div>
             </div>

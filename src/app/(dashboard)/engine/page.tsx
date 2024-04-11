@@ -7,12 +7,11 @@ import Uploader from "@/components/ui/uploader";
 import {ExtractBpm, ExtractKey} from "@/scripts/audioEngine";
 
 export default function Page() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading]: boolean = useState(false);
 
     const supabase = createClient();
     const [userSamples, setUserSamples] = useState([]);
     const [sampleUrl, setSampleUrl] = useState('');
-    const [engineFile, setEngineFile] = useState();
     const [selectVal, setSelectVal]: any = useState('1');
     const [bpm, setBpm] = useState();
     const [key, setKey] = useState('');
@@ -32,25 +31,31 @@ export default function Page() {
 
 
     async function RunAnalysis() {
+        setLoading(false);
          let {data} =  supabase.storage
             .from('sample')
             .getPublicUrl(selectVal + '.wav');
 
 
-
         const modelBpm = await ExtractBpm(data.publicUrl);
-        setBpm(modelBpm.toFixed(0));
+
 
 
         const modelKey = await ExtractKey(data.publicUrl);
         setKey(modelKey);
         setSampleUrl(data.publicUrl);
+        setBpm(modelBpm.toFixed(0));
+
+        console.log(key, bpm, selectVal);
+
     }
 
 
     useEffect(() => {
         grabUserData();
-    });
+    }, [userSamples]);
+
+
 
     return (
         <>
@@ -62,7 +67,6 @@ export default function Page() {
                         value={selectVal}
                         onChange={(e) => {
                             setSelectVal(e.target.value)
-                            setLoading(false);
                         }}
                         className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
                     >
@@ -74,9 +78,9 @@ export default function Page() {
                     <button
                         className="bg-background-light p-5 rounded-md m-5 font-[arial] text-white uppercase"
                         onClick={() => {
-                            setLoading(true)
-                            RunAnalysis()
-
+                            setLoading(false);
+                            RunAnalysis();
+                            setLoading(true);
                         }}
                     >RUN ANALYSIS
                     </button>
