@@ -2,14 +2,27 @@
 import {createClient} from "@/utils/supabase/client";
 import {useEffect, useState} from "react";
 import SampleDisplay from "@/components/ui/sample-display";
-import {useRouter} from "next/navigation";
 
 export default function Page() {
-    const router = useRouter();
     const supabase = createClient();
     const [playlists, setPlaylists] = useState([]);
+    const [userSamples, setUserSamples] = useState([]);
+    const [selectVal, setSelectVal]: any = useState();
     const [showingData, setShowingData] = useState(false);
+    const [addingSample, setAddingSample] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
+
+
+    async function getUserSamples() {
+        const  {data: {user: currentUser}} = await supabase.auth.getUser();
+
+        const {data} = await supabase
+            .from('samples')
+            .select()
+            .eq('created_by', currentUser.id);
+
+        setUserSamples(data);
+    }
 
      async function getUserPlaylists() {
         const  {data: {user: currentUser}} = await supabase.auth.getUser();
@@ -22,6 +35,23 @@ export default function Page() {
         setPlaylists(data);
     }
 
+     async function addSong() {
+        console.log('Song to be added: ' + selectVal);
+        const {data} = await supabase
+            .from('samples')
+            .select()
+            .eq('file_name', selectVal);
+
+        console.log(data);
+        console.log(currentPlaylist.samples);
+
+        let updatedPlaylist = currentPlaylist.samples.push(data);
+       // setCurrentPlaylist();
+
+        console.log(currentPlaylist);
+        console.log(updatedPlaylist);
+    }
+
     function displayPlaylist(playlist) {
          console.log(playlist);
         setCurrentPlaylist(playlist);
@@ -30,6 +60,7 @@ export default function Page() {
 
     useEffect(() => {
         getUserPlaylists();
+        getUserSamples();
     }, []);
 
     return (
@@ -52,9 +83,29 @@ export default function Page() {
                     {showingData &&
                         <div>
                             <SampleDisplay playlist={currentPlaylist}/>
+                            <button onClick={() => setAddingSample(true)}>Add Sample</button>
+                        </div>
+                    }
+
+                    {addingSample &&
+                        <div>
+                            <select
+                                value={selectVal}
+                                onChange={(e) => {
+                                    setSelectVal(e.target.value)
+                                }}
+                                className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
+                            >
+                                <option value='1' disabled>Select a sample...</option>
+                                {userSamples.map(sample => (
+                                    <option key={sample.id} value={sample.file_name}>{sample.file_name}</option>
+                                ))}
+                            </select>
+                            <button onClick={() => addSong()}>Add to playlist</button>
                         </div>
 
                     }
+
                 </div>
             </div>
 
