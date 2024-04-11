@@ -46,7 +46,6 @@ export default function Page() {
         setSampleUrl(data.publicUrl);
         setBpm(modelBpm.toFixed(0));
 
-        console.log(key, bpm, selectVal);
 
     }
 
@@ -77,9 +76,9 @@ export default function Page() {
                     </select>
                     <button
                         className="bg-background-light p-5 rounded-md m-5 font-[arial] text-white uppercase"
-                        onClick={() => {
+                        onClick={async () => {
                             setLoading(false);
-                            RunAnalysis();
+                            await RunAnalysis();
                             setLoading(true);
                         }}
                     >RUN ANALYSIS
