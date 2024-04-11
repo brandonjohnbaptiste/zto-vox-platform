@@ -1,12 +1,13 @@
 'use client'
 import {createClient} from "@/utils/supabase/client";
 import {useEffect, useState} from "react";
+import SampleDisplay from "@/components/ui/sample-display";
 
 export default function Page() {
     const supabase = createClient();
     const [playlists, setPlaylists] = useState([]);
     const [showingData, setShowingData] = useState(false);
-    const [name, setName] = useState('');
+    const [currentPlaylist, setCurrentPlaylist] = useState();
 
     async function getUserPlaylists() {
         const {data: {user}} = await supabase.auth.getUser();
@@ -20,7 +21,7 @@ export default function Page() {
     }
 
     function displayPlaylist(playlist) {
-        setName('Name: ' + playlist.playlist_name);
+        setCurrentPlaylist(playlist);
         setShowingData(true);
 
     }
@@ -46,7 +47,7 @@ export default function Page() {
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
                     {showingData &&
-                        <p>{name}</p>
+                        <SampleDisplay playlist={currentPlaylist} />
                     }
                 </div>
             </div>
