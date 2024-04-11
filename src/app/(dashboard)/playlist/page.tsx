@@ -6,18 +6,20 @@ import SampleDisplay from "@/components/ui/sample-display";
 export default function Page() {
     const supabase = createClient();
     const [playlists, setPlaylists] = useState([]);
+    const [user, setUser]: any = useState();
     const [showingData, setShowingData] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
 
     async function getUserPlaylists() {
-        const {data: {user}} = await supabase.auth.getUser();
+        const  {data: {user: currentUser}} = await supabase.auth.getUser();
 
         const {data, err} = await supabase
             .from('playlists')
             .select()
-            .eq('created_by', user.id);
+            .eq('created_by', currentUser.id);
 
         setPlaylists(data);
+        setUser(currentUser);
     }
 
     function displayPlaylist(playlist) {
@@ -32,7 +34,7 @@ export default function Page() {
 
     return (
         <>
-            <h1 className="text-white uppercase font-[arial] font-bold text-[2rem] m-5">Playlist</h1>
+            <h1 className="text-white uppercase font-[arial] font-bold text-[2rem] m-5">Playlists</h1>
             <div className="flex flex-row">
                 <div className="bg-grey m-5 p-5 w-[30vh] h-[40vh] rounded-md drop-shadow-xl">
                     {playlists.map(playlist => (
@@ -47,7 +49,7 @@ export default function Page() {
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
                     {showingData &&
-                        <SampleDisplay playlist={currentPlaylist} />
+                        <SampleDisplay playlist={currentPlaylist} user={user} />
                     }
                 </div>
             </div>
