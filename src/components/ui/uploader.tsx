@@ -50,11 +50,18 @@ export default function Uploader() {
     async function uploadSample() {
         console.log(sample);
 
+        const {data: {user}} = await supabase.auth.getUser();
         const {data} = supabase.storage
             .from('sample')
             .getPublicUrl(sample.name);
 
         const file_name = sample.name.slice(0,-4);
+
+        const {err} = await supabase
+            .from('samples')
+            .insert({genre: genre, pathname: data.publicUrl, file_name: file_name, public_sample: false, created_by: user.id});
+
+        console.log(err);
 
     }
 
