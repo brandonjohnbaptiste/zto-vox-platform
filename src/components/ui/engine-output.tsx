@@ -8,6 +8,11 @@ import {createClient} from "@/utils/supabase/client";
 
 export default function EngineOutput({file}) {
     const supabase = createClient();
+    const [keyMatch, setKeyMatch] = useState([]);
+    const [bpmMatch, setBpmMatch] = useState([]);
+    const [bestMatch, setBestMatch] = useState([]);
+
+    const [foundMatch, setFoundMatch] = useState(false);
     const useAudio = (url) => {
         const [audio] = useState(new Audio(url));
         const [playing, setPlaying] = useState(false);
@@ -35,11 +40,75 @@ export default function EngineOutput({file}) {
             .eq('file_name', file.title)
             .select();
 
-        console.log(data);
+    }
+
+    async function getSimilarSamples() {
+        // matching by key
+        const {data: keyMatch, err} = await supabase
+            .from('samples')
+            .select()
+            .eq('key', file.key.toLowerCase());
+
+        let keyMatchArr = Object.assign([], keyMatch);
+        let keyOutputArr = [];
+        keyMatchArr.map(data => {
+            if (data.file_name != file.title) {
+                keyOutputArr.push(data);
+            }
+                });
+
+        //matching by bpm
+        const upperLimit = parseInt(file.bpm) + 5;
+        const lowerLimit = parseInt(file.bpm) - 5;
+
+
+
+        const {data: bpmMatch} = await supabase
+            .from('samples')
+            .select()
+            .lte('bpm', upperLimit)
+            .gte('bpm', lowerLimit);
+
+        let bpmMatchArr = Object.assign([], bpmMatch);
+        let bpmOutputArr = [];
+        bpmMatchArr.map(data => {
+            if (data.file_name != file.title) {
+                bpmOutputArr.push(data);
+            }
+        });
+
+
+
+        //best match
+        const extactUpperLimit = parseInt(file.bpm) + 2;
+        const extractLowerLimit = parseInt(file.bpm) + 2;
+
+        const {data: bestMatch} = await supabase
+            .from('samples')
+            .select()
+            .eq('key', file.key.toLowerCase())
+            .lte('bpm', extactUpperLimit)
+            .gte('bpm', extractLowerLimit);
+
+        let bestMatchArr = Object.assign([], bestMatch);
+        let bestMatchOutputArr = [];
+        bestMatchArr.map(data => {
+            if (data.file_name != file.title) {
+                bestMatchOutputArr.push(data);
+            }
+        });
+
+
+        setBestMatch(bestMatchOutputArr);
+        setKeyMatch(keyOutputArr);
+        setBpmMatch(bpmOutputArr);
+        setFoundMatch(true);
     }
 
     useEffect( () => {
+        getSimilarSamples();
         updateSampleInfo();
+
     }, [])
 
 
@@ -68,7 +137,19 @@ export default function EngineOutput({file}) {
                     </button>
                </div>
             </div>
-
+            { foundMatch &&
+                <div>
+                    <div>
+                        {bestMatch.length >= 1 ?  'found best match' : 'no best match'}
+                    </div>
+                    <div>
+                        {bpmMatch.length >= 1 ? 'found bpm match' : 'no bpm match'}
+                    </div>
+                    <div>
+                        {keyMatch.length >= 1 ? 'found key match' : 'no key match' }
+                    </div>
+                </div>
+            }
 
 
 
