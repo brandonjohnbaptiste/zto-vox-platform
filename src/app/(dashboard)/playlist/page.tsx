@@ -5,6 +5,7 @@ import SampleDisplay from "@/components/ui/sample-display";
 
 export default function Page() {
     const supabase = createClient();
+    const [playlistName, setPlaylistName] = useState('');
     const [playlists, setPlaylists] = useState([]);
     const [userSamples, setUserSamples] = useState([]);
     const [selectVal, setSelectVal]: any = useState();
@@ -62,10 +63,22 @@ export default function Page() {
         setShowingData(true);
     }
 
+
+    async function createPlaylist() {
+        const  {data: {user: currentUser}} = await supabase.auth.getUser();
+        const {err} = await supabase
+            .from('playlists')
+            .insert({playlist_name: playlistName, created_by: currentUser.id, samples: []})
+    }
+
     useEffect(() => {
         getUserPlaylists();
         getUserSamples();
     }, []);
+
+    useEffect(() => {
+       getUserPlaylists();
+    }, [playlists.length])
 
     return (
         <>
@@ -82,6 +95,19 @@ export default function Page() {
                         >{playlist.playlist_name}
                         </button>
                     ))}
+                    <input
+                           value={playlistName}
+                           onChange={(e) => setPlaylistName(e.target.value)}
+                           type="text"
+                           className="bg-background-light text-white font-[arial] p-3 rounded-md focus:border-none"
+                    />
+                    <button
+                        onClick={() => {
+                            createPlaylist();
+                            setPlaylistName('');
+                            getUserPlaylists();
+                        }}
+                    >Add new playlist</button>
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
                     {showingData &&

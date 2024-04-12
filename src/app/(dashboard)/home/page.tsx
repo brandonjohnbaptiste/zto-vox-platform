@@ -23,10 +23,7 @@ export default function Page() {
 
     return (
         <>
-            <div>
-                <select name="genre" id=""></select>
-            </div>
-            <h1 className="font-[arial] text-[1.75rem] text-white font-bold">DASHBOARD</h1>
+            <h1>DASHBOARD</h1>
             {samples.map(sample => (
                 <MusicDisplay key={sample.id} sample={sample}/>
             ))}
