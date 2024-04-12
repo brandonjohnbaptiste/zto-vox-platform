@@ -84,30 +84,38 @@ export default function Page() {
         <>
             <h1 className="text-white uppercase font-[arial] font-bold text-[2rem] m-5">Playlists</h1>
             <div className="flex flex-row">
-                <div className="bg-grey m-5 p-5 w-[30vh] h-[40vh] rounded-md drop-shadow-xl">
-                    {playlists.map(playlist => (
+                <div className="bg-grey m-5 p-5 w-[30vh] h-[80vh] rounded-md drop-shadow-xl flex flex-col justify-between">
+                    <div>
+                        {playlists.map(playlist => (
+                            <button
+                                className="bg-accent p-5 my-1 w-[100%] rounded-md text-white text-[1.2rem] font-[arial]  hover:bg-accent/80"
+                                key={playlist.id}
+                                onClick={() => {
+                                    setShowingData(false);
+                                    getUserPlaylists().then(() => displayPlaylist(playlist))
+                                }}
+                            >{playlist.playlist_name}
+                            </button>
+                        ))}
+                    </div>
+                    <div>
+                        <input
+                            value={playlistName}
+                            onChange={(e) => setPlaylistName(e.target.value)}
+                            type="text"
+                            placeholder="Playlist name..."
+                            className="bg-background-light text-white font-[arial] p-4 rounded-md focus:border-none"
+                        />
                         <button
-                            key={playlist.id}
+                            className="bg-accent p-2 w-[100%] my-2 text-white font-[arial] font-bold uppercase hover:bg-accent/70"
                             onClick={() => {
-                                setShowingData(false);
-                                getUserPlaylists().then(() => displayPlaylist(playlist))
+                                createPlaylist();
+                                setPlaylistName('');
+                                getUserPlaylists();
                             }}
-                        >{playlist.playlist_name}
-                        </button>
-                    ))}
-                    <input
-                           value={playlistName}
-                           onChange={(e) => setPlaylistName(e.target.value)}
-                           type="text"
-                           className="bg-background-light text-white font-[arial] p-3 rounded-md focus:border-none"
-                    />
-                    <button
-                        onClick={() => {
-                            createPlaylist();
-                            setPlaylistName('');
-                            getUserPlaylists();
-                        }}
-                    >Add new playlist</button>
+                        >Add new playlist</button>
+                    </div>
+
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
                     {showingData &&
