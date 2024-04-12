@@ -45,18 +45,16 @@ export default function Page() {
 
         let updatedPlaylist = {...currentPlaylist};
         updatedPlaylist.samples = newSampleArray
-        console.log(currentPlaylist);
-        console.log(updatedPlaylist);
 
 
         setCurrentPlaylist(updatedPlaylist);
 
-        /* TODO
-        *
-        * Update the database with new json data
-        *
-        * */
+        const {error} = await supabase
+            .from('playlists')
+            .update({samples: updatedPlaylist.samples})
+            .eq('id', updatedPlaylist.id);
 
+        console.log(error);
     }
 
     function displayPlaylist(playlist) {
