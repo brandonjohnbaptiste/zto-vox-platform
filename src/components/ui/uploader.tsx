@@ -6,10 +6,17 @@ import {Dashboard} from "@uppy/react";
 
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
+import {createClient} from "@/utils/supabase/client";
 
 export default function Uploader() {
+    const supabase = createClient();
+
+    const [fileUploaded, setFileUploaded] = useState(false);
+    const [sample, setSample]: any = useState();
+    const [genre, setGenre] = useState('');
+
     let [uppy] = useState(() => new Uppy(
-        {restrictions: {maxNumberOfFiles: 1}}
+            {restrictions: {maxNumberOfFiles: 1}}
         ).use(Tus, {
             endpoint: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/upload/resumable`,
             headers: {
@@ -32,14 +39,59 @@ export default function Uploader() {
             ...supabaseMetadata
         }
 
-        console.log('file added', file)
+        setSample(file);
     });
 
     uppy.on('complete', (result) => {
-        console.log('Upload complete, uploaded files:', result.successful);
+        setFileUploaded(true);
     });
 
 
+    async function uploadSample() {
+        console.log(sample);
 
-    return <Dashboard uppy={uppy} theme="dark" height={300} width={300}/>
+        const {data} = supabase.storage
+            .from('sample')
+            .getPublicUrl(sample.name);
+
+        const file_name = sample.name.slice(0,-4);
+
+    }
+
+    return (
+        <>
+            <Dashboard uppy={uppy} theme="dark" height={300} width={300}/>
+            {fileUploaded &&
+                <>
+                    <select
+                        className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
+                        value={genre}
+                        onChange={(e) => {
+                            setGenre(e.target.value);
+                        }
+                        }
+                    >
+                        <option value="1" disabled="">Select a genre</option>
+                        <option value="rnb">Rnb</option>
+                        <option value="hiphop">Hip hop</option>
+                        <option value="pop">Pop</option>
+                        <option value="rock">Rock</option>
+                    </select>
+                    <button
+                        onClick={() => {
+                            uploadSample();
+                            setFileUploaded(false);
+                        }
+                        }
+                    >Save file</button>
+
+                </>
+
+
+
+            }
+
+        </>
+
+    )
 }

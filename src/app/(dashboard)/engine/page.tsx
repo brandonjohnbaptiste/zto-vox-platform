@@ -13,6 +13,7 @@ export default function Page() {
     const [userSamples, setUserSamples] = useState([]);
     const [sampleUrl, setSampleUrl] = useState('');
     const [selectVal, setSelectVal]: any = useState('1');
+    const [genre, setGenre] = useState('1');
     const [bpm, setBpm] = useState();
     const [key, setKey] = useState('');
 
@@ -52,7 +53,7 @@ export default function Page() {
 
     useEffect(() => {
         grabUserData();
-    }, [userSamples]);
+    }, []);
 
 
 
@@ -61,10 +62,14 @@ export default function Page() {
             <div className="m-10">
                 <h1 className="font-[arial] text-[1.75rem] text-white font-bold">ENGINE ANALYSIS</h1>
                 <div className="w-[100%] bg-grey rounded-xl drop-shadow-xl mt-5 p-5">
-                    <Uploader/>
+                    <div>
+                        <Uploader/>
+                    </div>
+
                     <select
                         value={selectVal}
                         onChange={(e) => {
+                            setLoading(false);
                             setSelectVal(e.target.value)
                         }}
                         className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
