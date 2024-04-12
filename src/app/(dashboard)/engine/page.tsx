@@ -53,7 +53,7 @@ export default function Page() {
 
     useEffect(() => {
         grabUserData();
-    }, []);
+    }, [loading]);
 
 
 
@@ -71,6 +71,7 @@ export default function Page() {
                         onChange={(e) => {
                             setLoading(false);
                             setSelectVal(e.target.value)
+
                         }}
                         className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
                     >

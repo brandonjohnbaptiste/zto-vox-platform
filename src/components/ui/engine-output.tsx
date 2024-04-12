@@ -1,11 +1,13 @@
 'use client'
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
 import {useEffect, useState} from "react";
+import {createClient} from "@/utils/supabase/client";
 
 
 
 
 export default function EngineOutput({file}) {
+    const supabase = createClient();
     const useAudio = (url) => {
         const [audio] = useState(new Audio(url));
         const [playing, setPlaying] = useState(false);
@@ -24,6 +26,21 @@ export default function EngineOutput({file}) {
 
         return [playing, toggle];
     };
+
+
+    async function updateSampleInfo() {
+        const {data, err} = await supabase
+            .from('samples')
+            .update({key: file.key.toLowerCase(), bpm: file.bpm})
+            .eq('file_name', file.title)
+            .select();
+
+        console.log(data);
+    }
+
+    useEffect( () => {
+        updateSampleInfo();
+    }, [])
 
 
     const [playing, toggle] = useAudio(file.url);
