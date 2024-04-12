@@ -12,7 +12,8 @@ export default function Page() {
         const {data} = await supabase
             .from('samples')
             .select()
-            .eq('public_sample', true);
+            .eq('public_sample', true)
+            .limit(3);
 
         setSamples(data);
     }
@@ -23,10 +24,13 @@ export default function Page() {
 
     return (
         <>
-            <h1>DASHBOARD</h1>
-            {samples.map(sample => (
-                <MusicDisplay key={sample.id} sample={sample}/>
-            ))}
+            <h1 className="text-white uppercase font-[arial] font-bold text-[2rem] m-5">Dashboard</h1>
+            <div className="flex flex-row w-[80%] justify-around m-5 mx-auto">
+                {samples.map(sample => (
+                    <MusicDisplay key={sample.id} sample={sample}/>
+                ))}
+            </div>
+
         </>
     )
 }
