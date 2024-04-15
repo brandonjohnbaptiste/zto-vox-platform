@@ -2,6 +2,7 @@
 import {MusicalNoteIcon} from "@heroicons/react/24/solid";
 import {useEffect, useState} from "react";
 import {createClient} from "@/utils/supabase/client";
+import MusicDisplay from "@/components/ui/music-display";
 
 
 
@@ -116,40 +117,45 @@ export default function EngineOutput({file}) {
 
     return (
         <>
-            <div className="bg-gradient-to-b from-accent via-pink-accent/80 to-accent/30 w-[20%] h-[40vh] p-1 rounded-md drop-shadow-xl">
-                <div className="bg-grey w-[100%] h-[100%] rounded-md flex flex-col">
-                    <div className="my-5 basis-8/12 w-full h-full flex flex-col">
-                        <MusicalNoteIcon className="text-white w-20 h-20 mx-auto" />
-                        <h2 className="text-center font-[arial] font-bold text-white text-[1.2rem] mt-10">{file.title}</h2>
-                    </div>
-                    <div className="basis-2/12 w-full h-full flex">
-                        <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">BPM:</h3>
+            <div className="flex flex-row justify-between w-full">
+                <div className="bg-gradient-to-b from-accent via-pink-accent/80 to-accent/30 w-[20%] h-[40vh] p-1 rounded-md drop-shadow-xl">
+                    <div className="bg-grey w-[100%] h-[100%] rounded-md flex flex-col">
+                        <div className="my-5 basis-8/12 w-full h-full flex flex-col">
+                            <MusicalNoteIcon className="text-white w-20 h-20 mx-auto" />
+                            <h2 className="text-center font-[arial] font-bold text-white text-[1.2rem] mt-10">{file.title}</h2>
+                        </div>
+                        <div className="basis-2/12 w-full h-full flex">
+                            <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">BPM:</h3>
                             <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{file.bpm}</p>
-                    </div>
-                    <div className="basis-2/12 w-full h-full flex">
-                        <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">KEY: </h3>
-                        <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{file.key}</p>
-                    </div>
-                    <button
-                        className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105"
-                        onClick={toggle}
-                    >{playing ? 'Pause' : 'Play'}
-                    </button>
-               </div>
-            </div>
-            { foundMatch &&
-                <div>
-                    <div>
-                        {bestMatch.length >= 1 ?  'found best match' : 'no best match'}
-                    </div>
-                    <div>
-                        {bpmMatch.length >= 1 ? 'found bpm match' : 'no bpm match'}
-                    </div>
-                    <div>
-                        {keyMatch.length >= 1 ? 'found key match' : 'no key match' }
+                        </div>
+                        <div className="basis-2/12 w-full h-full flex">
+                            <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">KEY: </h3>
+                            <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{file.key}</p>
+                        </div>
+                        <button
+                            className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105"
+                            onClick={toggle}
+                        >{playing ? 'Pause' : 'Play'}
+                        </button>
                     </div>
                 </div>
-            }
+                <div>
+                    { foundMatch &&
+                        <div className="w-full flex flex-row m-2 h-[40vh]">
+                                {bestMatch.length >= 1 ?  <MusicDisplay sample={bestMatch[0]} /> : ''}
+
+                                {bpmMatch.length >= 1 ? <MusicDisplay sample={bpmMatch[0]} />: ''}
+
+                                {keyMatch.length >= 1 ? <MusicDisplay sample={keyMatch[0]}/> : '' }
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+
+
 
 
 

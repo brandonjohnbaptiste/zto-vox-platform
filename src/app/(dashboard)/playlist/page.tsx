@@ -118,37 +118,45 @@ export default function Page() {
 
                 </div>
                 <div className="bg-grey m-5 p-5 w-full h-[80vh] rounded-md drop-shadow-xl">
-                    {showingData &&
-                        <div>
-                            <SampleDisplay playlist={currentPlaylist}/>
-                            <button onClick={() => setAddingSample(true)}>Add Sample</button>
-                        </div>
-                    }
+                    <div className="flex flex-col h-full justify-between">
+                        {showingData &&
+                            <div>
+                                <SampleDisplay playlist={currentPlaylist}/>
+                                <button
+                                    className="text-white font-[arial] font-bold bg-accent p-5 rounded-md m-2"
+                                    onClick={() => setAddingSample(true)}>Add Sample</button>
+                            </div>
+                        }
+                        {addingSample &&
+                            <div>
 
-                    {addingSample &&
-                        <div>
-                            <select
-                                value={selectVal}
-                                onChange={(e) => {
-                                    setSelectVal(e.target.value)
-                                }}
-                                className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
-                            >
-                                <option value='1' disabled>Select a sample...</option>
-                                {userSamples.map(sample => (
-                                    <option key={sample.id} value={sample.file_name}>{sample.file_name}</option>
-                                ))}
-                            </select>
-                            <button
-                                onClick={() => {
+                                <select
+                                    value={selectVal}
+                                    onChange={(e) => {
+                                        setSelectVal(e.target.value)
+                                    }}
+                                    className="bg-accent p-4 font-[arial] text-white rounded-md drop-shadow-xl"
+                                >
+                                    <option value='1' disabled>Select a sample...</option>
+                                    {userSamples.map(sample => (
+                                        <option key={sample.id} value={sample.file_name}>{sample.file_name}</option>
+                                    ))}
+                                </select>
+                                <button
+                                    className="bg-background-light/60 p-3 mx-5 rounded-md drop-shadow-xl text-white font-[arial] hover:scale-110"
+                                    onClick={() => {
                                         setShowingData(false);
                                         addSong().then(() => setShowingData(true));
                                     }
-                                }
-                            >Add to playlist</button>
-                        </div>
+                                    }
+                                >Add to playlist</button>
+                            </div>
 
-                    }
+                        }
+                    </div>
+
+
+
 
                 </div>
             </div>
