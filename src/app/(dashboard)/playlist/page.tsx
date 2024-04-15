@@ -68,7 +68,9 @@ export default function Page() {
         const  {data: {user: currentUser}} = await supabase.auth.getUser();
         const {err} = await supabase
             .from('playlists')
-            .insert({playlist_name: playlistName, created_by: currentUser.id, samples: []})
+            .insert({playlist_name: playlistName, created_by: currentUser.id, samples: []});
+
+        getUserPlaylists();
     }
 
     useEffect(() => {
