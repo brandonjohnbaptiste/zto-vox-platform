@@ -8,7 +8,7 @@ export default function Page() {
     const [playlistName, setPlaylistName] = useState('');
     const [playlists, setPlaylists] = useState([]);
     const [userSamples, setUserSamples] = useState([]);
-    const [selectVal, setSelectVal]: any = useState();
+    const [selectVal, setSelectVal] = useState('1');
     const [showingData, setShowingData]: boolean = useState(false);
     const [addingSample, setAddingSample] = useState(false);
     const [currentPlaylist, setCurrentPlaylist] = useState();
@@ -47,7 +47,6 @@ export default function Page() {
         let updatedPlaylist = {...currentPlaylist};
         updatedPlaylist.samples = newSampleArray
 
-
         setCurrentPlaylist(updatedPlaylist);
 
         const {error} = await supabase
@@ -80,7 +79,7 @@ export default function Page() {
 
     useEffect(() => {
        getUserPlaylists();
-    }, [playlists.length])
+    }, [showingData]);
 
     return (
         <>
@@ -148,7 +147,9 @@ export default function Page() {
                                     className="bg-background-light/60 p-3 mx-5 rounded-md drop-shadow-xl text-white font-[arial] hover:scale-110"
                                     onClick={() => {
                                         setShowingData(false);
-                                        addSong().then(() => setShowingData(true));
+                                        addSong();
+                                        getUserPlaylists().then(() => setShowingData(false));
+                                        ;
                                     }
                                     }
                                 >Add to playlist</button>
