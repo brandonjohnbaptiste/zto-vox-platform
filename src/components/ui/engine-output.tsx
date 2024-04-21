@@ -118,22 +118,22 @@ export default function EngineOutput({file}) {
     return (
         <>
             <div className="flex flex-row justify-between w-full">
-                    <div className="bg-background rounded-md grid grid-cols-3 grid-rows-4 w-[60%] h-[40vh] border-5 border-white gap-2 drop-shadow-xl">
-                        <div className="flex flex-col col-span-2  row-span-3 place-self-center ">
+                    <div className="bg-background rounded-md grid grid-cols-3 grid-rows-4 w-[30%] h-[40vh] border-5 border-white gap-2 drop-shadow-xl">
+                        <div className="flex flex-col col-span-2  row-span-4 place-self-center ">
                             <MusicalNoteIcon className="text-white w-20 h-20 mx-auto" />
                             <h2 className="text-center font-[arial] font-bold text-white text-[1.2rem] mt-10">{file.title}</h2>
+                            <button
+                                className="bg-accent w-[60%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105"
+                                onClick={toggle}
+                            >{playing ? 'Pause' : 'Play'}
+                            </button>
                         </div>
-                        <button
-                            className="col-start-1 col-span-2  bg-accent w-[30%] mx-auto my-3 p-3 rounded-md text-white font-[arial] font-bold uppercase text-[.75rem] hover:scale-105 row-span-1"
-                            onClick={toggle}
-                        >{playing ? 'Pause' : 'Play'}
-                        </button>
-                        <div className="col-start-3 row-span-2 row-start-2">
-                            <div className="w-full h-full flex">
+                        <div className="col-start-3 row-span-2 row-start-2 self-center">
+                            <div className="flex row-span-1 row-start-2">
                                 <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">BPM:</h3>
                                 <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{file.bpm}</p>
                             </div>
-                            <div className="w-full h-full flex">
+                            <div className="flex row-span-1 row-start-3">
                                 <h3 className="ml-5 my-3 text-white font-[arial] font-bold uppercase text-[1rem]">KEY: </h3>
                                 <p className="my-3 ml-2 text-white font-[arial] text-[1rem]">{file.key}</p>
                             </div>
