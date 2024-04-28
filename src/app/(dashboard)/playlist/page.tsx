@@ -79,7 +79,7 @@ export default function Page() {
 
     useEffect(() => {
        getUserPlaylists();
-    }, [showingData]);
+    }, [playlists.length, showingData]);
 
     return (
         <>
@@ -147,9 +147,9 @@ export default function Page() {
                                     className="bg-background-light/60 p-3 mx-5 rounded-md drop-shadow-xl text-white font-[arial] hover:scale-110"
                                     onClick={() => {
                                         setShowingData(false);
-                                        addSong();
-                                        getUserPlaylists().then(() => setShowingData(false));
-                                        ;
+                                        addSong().then(() => setShowingData(true));
+                                        setAddingSample(false);
+
                                     }
                                     }
                                 >Add to playlist</button>
