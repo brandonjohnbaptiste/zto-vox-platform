@@ -48,7 +48,8 @@ export default function EngineOutput({file}) {
         const {data: keyMatch, err} = await supabase
             .from('samples')
             .select()
-            .eq('key', file.key.toLowerCase());
+            .eq('key', file.key.toLowerCase())
+            .eq('public_sample', true);
 
         let keyMatchArr = Object.assign([], keyMatch);
         let keyOutputArr = [];
@@ -68,7 +69,8 @@ export default function EngineOutput({file}) {
             .from('samples')
             .select()
             .lte('bpm', upperLimit)
-            .gte('bpm', lowerLimit);
+            .gte('bpm', lowerLimit)
+            .eq('public_sample', true);
 
         let bpmMatchArr = Object.assign([], bpmMatch);
         let bpmOutputArr = [];
@@ -89,7 +91,8 @@ export default function EngineOutput({file}) {
             .select()
             .eq('key', file.key.toLowerCase())
             .lte('bpm', extactUpperLimit)
-            .gte('bpm', extractLowerLimit);
+            .gte('bpm', extractLowerLimit)
+            .eq('public_sample', true);
 
         let bestMatchArr = Object.assign([], bestMatch);
         let bestMatchOutputArr = [];
@@ -117,8 +120,8 @@ export default function EngineOutput({file}) {
 
     return (
         <>
-            <div className="flex flex-row justify-between w-full">
-                    <div className="bg-background rounded-md grid grid-cols-3 grid-rows-4 w-[30%] h-[40vh] border-5 border-white gap-2 drop-shadow-xl">
+            <div className="flex flex-row w-full">
+                    <div className="bg-background p-20 rounded-md grid grid-cols-3 grid-rows-4 w-[60%] h-[40vh] gap-2 drop-shadow-xl">
                         <div className="flex flex-col col-span-2  row-span-4 place-self-center ">
                             <MusicalNoteIcon className="text-white w-20 h-20 mx-auto" />
                             <h2 className="text-center font-[arial] font-bold text-white text-[1.2rem] mt-10">{file.title}</h2>
@@ -142,13 +145,16 @@ export default function EngineOutput({file}) {
 
                     </div>
                 { foundMatch &&
-                    <div className="">
-                        {bestMatch.length >= 1 ?  <MusicDisplay sample={bestMatch[0]} /> : ''}
-
-                        {bpmMatch.length >= 1 ? <MusicDisplay sample={bpmMatch[0]} />: ''}
-
-                        {keyMatch.length >= 1 ? <MusicDisplay sample={keyMatch[0]}/> : '' }
-
+                    <div className="bg-green w-full h-[40vh] grid grid-cols-3 gap-5 p-5">
+                        <div className="col-span-1 text-white font-[arial] uppercase">
+                            {bestMatch.length >= 1 ?  <MusicDisplay sample={bestMatch[0]} /> : 'No Best Match Found'}
+                        </div>
+                        <div className="col-span-1 text-white font-[arial] uppercase">
+                            {bpmMatch.length >= 1 ? <MusicDisplay sample={bpmMatch[0]} />: 'No match based on BPM'}
+                        </div>
+                        <div className="col-span-1 text-white font-[arial] uppercase">
+                            {keyMatch.length >= 1 ? <MusicDisplay sample={keyMatch[0]}/> : 'No match based on Key' }
+                        </div>
                     </div>
                 }
             </div>
