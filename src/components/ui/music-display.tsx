@@ -24,8 +24,8 @@ export default function MusicDisplay({sample}) {
     const [playing, toggle] = useAudio(sample.pathname);
     return (
         <>
-            <div className="bg-gradient-to-b from-accent via-pink-accent/80 to-accent/30  p-1 rounded-md drop-shadow-xl">
-                <div className="bg-grey w-[100%] h-[100%] rounded-md flex flex-col">
+            <div className="bg-gradient-to-b from-accent via-pink-accent/80 to-accent/30 p-1 rounded-md drop-shadow-xl">
+                <div className="bg-grey w-[100%] h-[100%] rounded-md flex flex-col p-5">
                     <div className="my-5 basis-8/12 w-full h-full flex flex-col">
                         <MusicalNoteIcon className="text-white w-20 h-20 mx-auto" />
                         <h2 className="text-center font-[arial] font-bold text-white text-[1.2rem] mt-10">{sample.file_name}</h2>

@@ -145,7 +145,7 @@ export default function EngineOutput({file}) {
 
                     </div>
                 { foundMatch &&
-                    <div className="bg-green w-full h-[40vh] grid grid-cols-3 gap-5 p-5">
+                    <div className="bg-green w-full h-[40vh] grid grid-cols-3 px-5 gap-5">
                         <div className="col-span-1 text-white font-[arial] uppercase">
                             {bestMatch.length >= 1 ?  <MusicDisplay sample={bestMatch[0]} /> : 'No Best Match Found'}
                         </div>
